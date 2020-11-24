@@ -21,9 +21,9 @@ impl Config {
 
 #[derive(Error, Debug)]
 enum Error {
-    #[error("An internal pool error occured. Please try again later.")]
+    #[error("Pool error:`{0}`")]
     PoolError(PoolError),
-    #[error(transparent)]
+    #[error("Redis error:`{0}`")]
     RedisError(RedisError),
 }
 
