@@ -22,21 +22,9 @@ impl Config {
 #[derive(Error, Debug)]
 enum Error {
     #[error("Pool error:`{0}`")]
-    PoolError(PoolError),
+    PoolError(#[from]PoolError),
     #[error("Redis error:`{0}`")]
-    RedisError(RedisError),
-}
-
-impl From<PoolError> for Error {
-    fn from(error: PoolError) -> Self {
-        Self::PoolError(error)
-    }
-}
-
-impl From<RedisError> for Error {
-    fn from(error: RedisError) -> Self {
-        Self::RedisError(error)
-    }
+    RedisError(#[from]RedisError),
 }
 
 impl error::ResponseError for Error {}
